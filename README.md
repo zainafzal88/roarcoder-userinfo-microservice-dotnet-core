@@ -11,9 +11,23 @@ Create a Web API for user information of my personal [website](https://roarcoder
 ## Running
 1.  Make sure the docker is running
 2.  Clone or download the zip folder
-3.  Nagivate to the project folder 
-4.  Run `docker-compose.sh` by running the below command. This will create the database for you in the docker container
+3.  Nagivate to the project folder
+4.  Add NuGet Packages
+```
+dotnet add package NpgSql.EntityFrameworkCore.PostgreSQL.Design
+dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet tool install --global dotnet-aspnet-codegenerator
+```
+5.  Run the below command in the root of the project folder. It will start all the docker services
 ```
 docker-compose up
 ```
-5.  Open up DBeaver and connect to the database.
+6.  Open up DBeaver and connect to the database.
+7.  Create a table and add personal information outlined in `UserInfo.cs`
+8.  Come back to VS.
+9.  Build the project
+10. Go to Run -> Run With -> Custom Configuration -> ASP.NET Core
+11. Change App Url to `http://localhost:<port-number>/api/userinfo`
+12. You should see the personal information read from the database
