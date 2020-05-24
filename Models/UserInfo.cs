@@ -3,7 +3,7 @@ namespace RoarcoderUserInfoApi.Models
 {
     public class UserInfo
     {
-        public long UUID { get; set; }
+        public long id { get; set; }
         public string email { get; set; }
         public string firstName { get; set; }
         public string lasttName { get; set; }
