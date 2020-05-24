@@ -22,9 +22,9 @@ namespace RoarcoderUserInfoApi.Controllers
 
         // GET: api/UserInfo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserInfo>>> GetUserInfo()
+        public ActionResult<List<UserInfo>> GetAll()
         {
-            return await _context.UserInfo.ToListAsync();
+            return _context.UserInfo.ToList();
         }
 
         // GET: api/UserInfo/5
