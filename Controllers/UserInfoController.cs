@@ -29,9 +29,9 @@ namespace RoarcoderUserInfoApi.Controllers
 
         // GET: api/UserInfo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserInfo>> GetUserInfo(long id)
+        public ActionResult<UserInfo> GetUserInfo(long id)
         {
-            var userInfo = await _context.UserInfo.FindAsync(id);
+            var userInfo = _context.UserInfo.Find(id);
 
             if (userInfo == null)
             {
