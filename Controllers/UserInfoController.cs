@@ -40,6 +40,15 @@ namespace RoarcoderUserInfoApi.Controllers
 
             return userInfo;
         }
-     
+
+        [HttpPost]
+        public void Post([FromBody] UserInfo userInfo)
+        {
+            _context.Add(userInfo);
+
+            _context.SaveChanges();
+        }
+
+
     }
 }
