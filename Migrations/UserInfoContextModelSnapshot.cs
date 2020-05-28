@@ -31,7 +31,7 @@ namespace RoarcoderUserInfoApi.Migrations
                     b.Property<string>("firstName")
                         .HasColumnType("text");
 
-                    b.Property<string>("lasttName")
+                    b.Property<string>("lastName")
                         .HasColumnType("text");
 
                     b.Property<string>("occupation")
