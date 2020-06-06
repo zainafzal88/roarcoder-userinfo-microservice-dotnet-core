@@ -21,11 +21,6 @@ namespace RoarcoderUserInfoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect;
-                options.HttpsPort = 443;
-            });
             services.AddDbContext<UserInfoContext>(options =>
                  options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
@@ -39,11 +34,7 @@ namespace RoarcoderUserInfoApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
