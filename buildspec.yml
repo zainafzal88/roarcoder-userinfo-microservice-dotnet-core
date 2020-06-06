@@ -1,0 +1,22 @@
+version: 0.1
+
+env:
+  parameter-store:
+    DOT_NET_CORE_API: /codebuild/dotNetCoreApi
+
+phases:
+  build:
+    commands:
+      - echo "******** Building ASP.NET API ********"
+      - dotnet build --configuration Release
+  post_build:
+    commands:
+      - echo "******** Get ssh key from S3 ********"
+      - aws s3 cp s3://ssh-keys-zain/encrypted_id_rsa $HOME/encrypted_id_rsa
+      - aws kms decrypt --ciphertext-blob fileb://$HOME/encrypted_id_rsa --output text --query Plaintext | base64 --decode > $HOME/decrypted_id_rsa
+      - chmod 400 $HOME/decrypted_id_rsa
+      - echo "******** Upload to Raspberry Pi ********"
+      - scp -r -oStrictHostKeyChecking=no -i $HOME/decrypted_id_rsa ./bin/Release/netcoreapp3.1/* pi@$DOT_NET_CORE_API:/var/www/dotnet.roarcoder.dev
+    finally:
+      - rm $HOME/decrypted_id_rsa
+      - rm $HOME/encrypted_id_rsa
