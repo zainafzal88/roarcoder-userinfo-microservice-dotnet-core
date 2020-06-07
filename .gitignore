@@ -405,7 +405,7 @@ ASALocalRun/
 .localhistory/
 
 # file/folders
-.vs
 .vscode
+.vs
 obj
 bin
